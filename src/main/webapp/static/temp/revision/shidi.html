@@ -1,0 +1,77 @@
+<div class="autlayer">
+	<div class="autlayer_t"><img src="../../images/shidi_t.jpg" /><a href="#" class="autlayer_close fr"  onclick="parent.closefancy();"></a></div>
+	<div class="autlayer_c">
+		<div class="upload_t">
+			<p>1.目前实地审核申请仅对经营类客户开放；</p>
+			<p>2.申请人名下有固定资产，经营时间满一年；</p>
+			<p>3.借款申请额在3万以上，且申请人必须已经提交四项必要信用认证资料。</p>	
+		</div>
+		<form id="form14" method="post">
+		<table class="upload_c">
+			<tr>
+				<td class="td1">申请人姓名</td>
+				<td class="td2"><input type="text" class="input_text1 realname required" /></td>
+				<td colspan="2"><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td class="td1">联系电话</td>
+				<td class="td2"><input type="text" class="input_text1 wd_r1 phone1 required" /> - <input type="text" class="input_text1 wd_r2 phone2 required" /></td>
+				<td colspan="2"><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td class="td1">公司地址</td>
+				<td class="td2"><input type="text" class="input_text1 chars100 required" /></td>
+				<td colspan="2"><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td class="td1">家庭地址</td>
+				<td class="td2"><input type="text" class="input_text1 chars100 required" /></td>
+				<td colspan="2"><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td class="td1">资产情况</td>
+				<td class="td2"><input type="text" class="input_text1 money required" /></td>
+				<td class="td4">元 </td>
+				<td><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td class="td1">经营时间</td>
+				<td class="td2"><input type="text" class="input_text1 number4 required" /></td>
+				<td class="td4">年</td>
+				<td><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td class="td1">月均流水</td>
+				<td class="td2"><input type="text" class="input_text1 money required" /></td>
+				<td class="td4">元 </td>
+				<td><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td class="td1">申请金额</td>
+				<td class="td2"><input type="text" class="input_text1 money required" /></td>
+				<td class="td4">元 </td>
+				<td><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" class="btn_r1 fr" value="提交审核" /></td>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+		</table>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	//焦点验证
+	$.mValidate($('#form14'),"true");
+	//提交验证，通过则关闭弹出层
+	$("input[type='submit']").click(function(){
+		if($.mValidate($('#form14'),"","true")){
+			alert("提交成功！")
+			parent.closefancy();
+		}else{
+			return false;
+		};
+	});
+});
+</script>

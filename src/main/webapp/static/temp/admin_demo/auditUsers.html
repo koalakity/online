@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>auditUsers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/easyui.css" type="text/css">
+<link rel="stylesheet" href="css/icon.css" type="text/css">
+<link rel="stylesheet" href="css/m_style.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.cookie.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/easyui-lang-zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_common.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_fuc.js" charset="utf-8"></script>
+<style type="text/css">
+.datagrid .datagrid-pager { border-bottom:1px solid #95B8E7;}
+</style>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+	<!-- 列表  -->
+	$('#auditUsers_datagrid').datagrid({
+		url : 'json/auditUsers.json',
+		fitColumns : true,
+		border : false,
+		pagination : true,
+		striped: true,
+		rownumbers : true,
+		columns : [[ 
+			{field : 'ck',checkbox : true},
+			{field : 'loginName',title : '昵称',width : 100,formatter : formatLoginName},
+			{field : 'realName',title : '姓名',width : 50},
+			{field : 'isApproveCard',title : 'ID5验证',width : 50,formatter : formatApprove},
+			{field : 'creditGrade',title : '信用等级',width : 50,formatter : formatGrade},
+			{field : 'creditAmount',title : '信用额度',width : 50},
+			{field : 'materialReviewStatus',title : '审核状态',width : 50,formatter : formatStatu},
+			{field : 'inclosureSubmitTimeFormat',title : '提交时间',width : 80}
+		]]
+	});
+	<!-- 列格搜索  -->
+	$('#auditUsers_search').searchbox({  
+		searcher:function(val,name){  
+			alert("搜索栏:" + name + " 搜索内容:" + val)  
+		},  
+		prompt:'请输入搜索内容'  
+	});
+});
+<!-- 编辑  -->
+function editAudit(){
+	var rows = $('#auditUsers_datagrid').datagrid('getChecked');
+	var url="auditUsersDetail.html";
+	if (rows.length > 1) {
+		$.messager.show({
+			title : '提示',
+			msg : '一次只能对一个用户进行编辑！'
+		});
+	}else if(rows.length < 1){
+		$.messager.show({
+			title : '提示',
+			msg : '请勾选要编辑的用户！'
+		});
+	}else{
+		window.location.href=url;
+	};
+};
+<!-- ID5验证  -->
+function formatApprove(val){
+   if(val=="0"){
+      return "未验证";
+   }else if(val=="1"){
+      return "已验证";
+   }else{
+      return "";
+   };
+};
+<!-- 昵称  -->
+function formatLoginName(val){
+	url='userInfoPerson.html';
+	return $.mFuc.newW(url,val);
+};
+<!-- 信用等级  -->
+function formatGrade(val){
+	switch(val){
+		case "7":
+			return $.mFuc.backpic("img22.gif","34","16");
+			break;
+		case "6":
+			return $.mFuc.backpic("img23.gif","34","16");
+			break;
+		case "5":
+			return $.mFuc.backpic("img24.gif","34","16");
+			break;
+		case "4":
+			return $.mFuc.backpic("img25.gif","34","16");
+			break;
+		case "3":
+			return $.mFuc.backpic("img26.gif","34","16");
+			break;
+		case "2":
+			return $.mFuc.backpic("img27.gif","34","16");
+			break;
+		case "1":
+			return $.mFuc.backpic("img28.gif","34","16");
+			break;
+		default:
+			return "普通会员";
+	};
+};
+<!-- 审核状态  -->
+function formatStatu(val){
+   if(val=="0"){
+      return "待审核";
+   }else if(val=="1"){
+      return "待初定";
+   }else if(val=="2"){
+      return "待终定";
+   }else if(val=="3"){
+      return "被驳回";
+   }else if(val=="4"){
+      return "补充资料";
+   }else if(val=="5"){
+      return "已终定";
+   }else{
+      return "";
+   };
+};
+<!-- 清空搜索  -->
+function cSearch(){
+	$('#auditUsers_datagrid').datagrid('load',{});
+	$('#auditUsers_search').searchbox('setValue','');
+}
+<!-- 高级搜索  -->
+function aSearch(){
+	$('<div/>').dialog({
+		href : 'auditUsersSearch.html',
+		width : 270,
+		height : 140,
+		modal : true,
+		title : '高级搜索',
+		buttons : [{
+			text : '搜索',
+			iconCls : 'icon-search',
+			handler : function(){
+				var d = $(this).closest('.window-body');
+				d.dialog('destroy');
+			}
+		},{
+			text : '取消',
+			iconCls : 'icon-cancel',
+			handler : function(){
+				var d = $(this).closest('.window-body');
+				d.dialog('destroy');
+			}
+		}],
+		onClose : function() {
+			$(this).dialog('destroy');
+		}
+	});
+};
+</script>
+</head>
+<body>
+	<table id="auditUsers_datagrid" toolbar="#toolbar"></table>
+	<!-- toolbar  -->
+	<div id="toolbar">
+		<div class="fr">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="aSearch()">高级搜索</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="cSearch()">清空条件</a>
+		</div>
+		<div class="toolbar-s-input">
+			<input id="auditUsers_search"></input>
+		</div>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editAudit()">编辑</a>
+	</div>
+</body>
+</html>

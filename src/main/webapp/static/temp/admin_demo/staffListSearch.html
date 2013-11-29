@@ -1,0 +1,28 @@
+<table class="m0" width="100%">
+	<tr>
+		<td align="right" width="77">用户编号:</td>
+		<td><input type="text"/></td>
+	</tr>
+	<tr>
+		<td align="right">用户姓名:</td>
+		<td><input type="text"/></td>
+	</tr>
+	<tr>
+		<td align="right">职级:</td>
+		<td><input type="text"/></td>
+	</tr>
+	<tr>
+		<td align="right">所属部门:</td>
+		<td>
+			<select class="easyui-combotree" data-options="url:'json/staffPart.json',lines:true,cascadeCheck:false,panelWidth:'200',width:153" multiple></select>
+		</td>
+	</tr>
+	<tr>
+		<td align="right">可操作系统:</td>
+		<td>
+			<select class="easyui-combobox" editable="false">
+				<option value="">全部</option>
+			</select>
+		</td>
+	</tr>
+</table>

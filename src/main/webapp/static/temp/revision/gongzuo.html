@@ -1,0 +1,109 @@
+<div class="autlayer">
+	<div class="autlayer_t"><img src="../../images/gongzuo_t.jpg" /><a href="#" class="autlayer_close fr"  onclick="parent.closefancy();"></a></div>
+	<div class="autlayer_c">
+		<div class="upload_t">
+			<p>1.工薪阶层：可上传带有姓名及照片的工作证、劳动合同、在职证明（加盖公章）；</p>
+			<p>2.私营企业主：可上传营业执照、税务登记证、店面照片（含营业执照）；</p>
+			<p>3.淘宝网商：可上传网店主页和后台的截屏(含网址）、最近3个月的成功交易流水记录</p>
+		</div>
+		<form id="form2" method="post">
+		<table class="upload_c">
+			<tr>
+				<td class="td1">公司名称</td>
+				<td class="td2"><input type="text" class="input_text1 chars50 required" /></td>
+				<td><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td class="td1">公司类别</td>
+				<td class="td2">
+					<div class="select1_border">
+						<div class="select1_con">
+							<select class="select1"><option></option></select>
+						</div>
+					</div>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="td1">公司行业</td>
+				<td class="td2">
+					<div class="select1_border">
+						<div class="select1_con">
+							<select class="select1"><option></option></select>
+						</div>
+					</div>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="td1">公司规模</td>
+				<td class="td2">
+					<div class="select1_border">
+						<div class="select1_con">
+							<select class="select1"><option></option></select>
+						</div>
+					</div>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="td1">职位</td>
+				<td class="td2"><input type="text" class="input_text1 chars50 required" /></td>
+				<td><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td class="td1">在现单位工作年限</td>
+				<td class="td2">
+					<div class="select1_border">
+						<div class="select1_con">
+							<select class="select1"><option></option></select>
+						</div>
+					</div>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="td1">工作电话</td>
+				<td class="td2"><input type="text" class="input_text1 wd_r1 phone1 required" /> - <input type="text" class="input_text1 wd_r2 phone2 required" /></td>
+				<td><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td class="td1">工作邮箱</td>
+				<td class="td2"><input type="text" class="input_text1 email required" /></td>
+				<td><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td class="td1">公司地址</td>
+				<td class="td2"><input type="text" class="input_text1  chars100 required" /></td>
+				<td><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr class="tr1">
+				<td colspan="2"><input type="button" class="btn_r2 fr" value="上传文件" /><span class="sp1">每张图片最大限制为3MB，图片格式为JPG,GIF,PNG&nbsp;</span></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="3" class="tc">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" class="btn_r1 fr" value="提交审核" /></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	//焦点验证
+	$.mValidate($('#form2'),"true");
+	//提交验证，通过则关闭弹出层
+	$("input[type='submit']").click(function(){
+		if($.mValidate($('#form2'),"","true")){
+			alert("提交成功！")
+			parent.closefancy();
+		}else{
+			return false;
+		};
+	});
+});
+</script>

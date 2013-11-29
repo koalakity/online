@@ -1,0 +1,26 @@
+<table style="width:100%; border-bottom:1px solid #95B8E7">
+	<tr height="30">
+		<td style="width:55px; padding:0 5px"><strong>投标进度</strong></td>
+		<td><div class="easyui-progressbar" style="width:200px; height:15px; position: relative;" value="20"></div></td>
+	</tr>
+</table>
+<table id="loanDetailTab2_datagrid"></table>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+	$('#loanDetailTab2_datagrid').datagrid({
+		url : 'json/loanDetailTab2.json',
+		fitColumns : true,
+		border : false,
+		pagination : true,
+		striped: true,
+		rownumbers : true,
+		singleSelect : true,
+		columns : [[ 
+			{field : 'realName',title : '投标人',width : 100},
+			{field : 'investAmountFormatt',title : '投标金额',width : 50},
+			{field : 'monthRepayPrincipal',title : '月收本息',width : 50},
+			{field : 'inverestRemainderPrincipal',title : '剩余本金',width : 50}
+		]]
+	});
+});
+</script>

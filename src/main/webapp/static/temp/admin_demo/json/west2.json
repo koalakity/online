@@ -1,0 +1,41 @@
+[{
+	"text":"待审核借款列表",
+	"attributes":{  
+		"src":"auditloan.html"
+	}
+},{
+	"text":"招标中借款列表",
+	"attributes":{  
+		"src":"error_null_href.html"
+	}
+},{
+	"text":"已满标借款列表",
+	"attributes":{  
+		"src":"error_null_href.html"
+	}
+},{
+	"text":"还款中借款列表",
+	"attributes":{  
+		"src":"error_null_href.html"
+	}
+},{
+	"text":"已还清借款列表",
+	"attributes":{  
+		"src":"error_null_href.html"
+	}
+},{
+	"text":"流标借款列表",
+	"attributes":{  
+		"src":"error_null_href.html"
+	}
+},{
+	"text":"初级催收列表",
+	"attributes":{  
+		"src":"error_null_href.html"
+	}
+},{
+	"text":"高级催收列表",
+	"attributes":{  
+		"src":"error_null_href.html"
+	}
+}]

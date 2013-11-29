@@ -1,0 +1,13 @@
+.account_l dl dt { background:none;}
+.account_l dl dd a { background: url("../images/news_side_bg2.jpg") no-repeat 30px 0;}
+.account_l dl dd a.on { background: url("../images/news_side_bg1.jpg") no-repeat #E1E6EB 30px 0;}
+.news_t { height:29px; line-height:29px; padding:0 10px; border-bottom:1px solid #dcdcdc; background:#efefef; font-size:14px;}
+.news_c { padding:8px 15px 20px;}
+.news_c2 { padding:18px 35px 20px;}
+.news_c2 h3 { font-size:18px; line-height:50px; text-indent:0; text-align:center;}
+.news_u1 li { height:40px; line-height:40px; border-bottom:1px dashed #ccc; font-size:14px;}
+.news_u1 span { float:right;}
+.news_u2 li { height:120px; padding-top:15px; border-bottom:1px dashed #ccc; overflow:hidden;}
+a.news_u2_t, a.news_u2_t:visited { color:#3A8EDC; font-weight:bold; font-size:14px;}
+a.news_u2_t:hover { text-decoration:underline;}
+.news_u2 img { float:left; width:100px; height:90px; margin:5px 20px 20px 0; padding:2px; background:#FFFFFF; border:1px solid #CECECE;}

@@ -1,0 +1,11 @@
+[{
+	"text":"用户列表",
+	"attributes":{  
+		"src":"staffList.html"
+	}
+},{
+	"text":"部门列表",
+	"attributes":{  
+		"src":"exceptControl.html"
+	}
+}]

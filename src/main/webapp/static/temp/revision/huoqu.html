@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>huoqu</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../../css/revision_html.css" type="text/css">
+<link rel="stylesheet" href="../../css/jquery.fancybox-1.3.4.css" type="text/css"/>
+<script type="text/javascript" src="../../js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.fancybox-1.3.4.js"></script>
+<script type="text/javascript">
+$(function(){
+	//table斑马线
+	$(".cer_optional_c").find("tr:odd").css("background","#fcfbfb");
+	//灯泡
+	$(".loan_r_person_r").find("img").hover(
+		function(){
+			$(this).attr("src","../../images/bulb_hover.png");
+			showTip($(this),"技术职称认证","待上传");
+		},
+		function(){
+			$(this).attr("src","../../images/bulb_fail.png");
+			$(".bulbtip").remove();
+		}
+	);
+});
+//灯泡显示方式
+var showTip = function(obj,msg1,msg2){
+	var tipBox = $('<div class="bulbtip"><div class="bulbtip-c"><p class="bulbtip-c-l"><strong>'+msg1+'</strong><br />'+msg2+'</p></div><div class="bulbtip-t"></div></div>');
+	if(msg1!=""){
+		tipBox.appendTo($("body")).css({
+			"left" : obj.offset().left,
+			"top" : obj.offset().top - 50
+		});		
+	};
+};
+//调用弹出层
+function showfancy(gourl,wd,hg){
+	$.ajax({
+	    url: gourl,
+		wd: wd,
+        hg: hg,
+		dataType: "html",
+		success: function(html) {		
+			 $.fancybox(html,{modal:true,autoDimensions:false,width:wd,height:hg,padding:0,margin:0,centerOnScroll:true});
+		}
+	})
+};
+//关闭弹出层
+function closefancy(){
+    $.fancybox.close();
+};
+</script>
+</head>
+<body>
+<div class="content">
+	<div class="loan_l">
+		<ul>
+			<li>上传资料&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></li>
+			<li class="on">获取额度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></li>
+			<li>发布借款&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></li>	
+		</ul>
+	</div>
+	<div class="loan_r">
+		<div class="loan_r_person">
+			<div class="loan_r_person_l">
+				<div class="person_img_bg">
+					<img src="../../images/nophoto.jpg" width="73" height="80" />
+				</div>
+				<p>昵称：月亮忘记了</p>
+				<p>邮箱：moonshine1687@126.com</p>
+				<p>手机号码：13512112512</p>
+				<p>注册时间： 2012-07-16</p>
+			</div>
+			<div class="loan_r_person_r">
+				<table>
+					<tr class="tr1">
+						<td>身份</td>
+						<td>工作</td>
+						<td>信用</td>
+						<td>收入</td>
+						<td>房产</td>
+						<td>购车</td>
+						<td>结婚</td>
+						<td>学历</td>
+						<td>居住地</td>
+						<td>技术职称</td>
+						<td>视频</td>
+						<td>手机实名</td>
+						<td>微博</td>
+						<td>实地</td>
+					</tr>
+					<tr>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_success.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="pro_cre">
+			恭喜，您获得的信用等级为 <span class="col_r2">HR</span> 级，信用额度为 <span class="col_r2">5000</span> 元！
+		</div>
+		<div class="cer_optional">
+			<div class="cer_optional_t attest_cre_t"></div>
+			<table class="cer_optional_c">
+				<tr>
+					<td width="30%" class="bold1">身份认证</td>
+					<td width="22%" class="bold1 col_r3">5分</td>
+					<td width="28%">审核通过</td>
+					<td width="15%" class="tc"><a href="#">查看</a> | <a href="#" onclick="showfancy('fangchan.html','725','450')">补充上传</a></td>
+				</tr>
+				<tr>
+					<td width="30%" class="bold1">工作认证</td>
+					<td width="22%" class="bold1 col_r1">5分</td>
+					<td width="28%">待上传</td>
+					<td width="15%" class="tc"><a href="#" onclick="showfancy('gouche.html','725','450')">上传资料</a></td>
+				</tr>
+				<tr>
+					<td width="30%" class="bold1">收入认证</td>
+					<td width="22%" class="bold1 col_r3">5分</td>
+					<td width="28%">审核中</td>
+					<td width="15%" class="tc"><a href="#">查看</a> | <a href="#" onclick="showfancy('jiehun.html','725','450')">补充上传</a></td>
+				</tr>
+				<tr>
+					<td width="30%" class="bold1">信用报告认证</td>
+					<td width="22%" class="bold1 col_r3">5分</td>
+					<td width="28%">审核通过</td>
+					<td width="15%" class="tc"><a href="#">查看</a> | <a href="#" onclick="showfancy('xueli.html','725','450')">补充上传</a></td>
+				</tr>
+				<tr>
+					<td width="30%" class="bold1">房产认证</td>
+					<td width="22%" class="bold1 col_r3">5分</td>
+					<td width="28%">审核通过</td>
+					<td width="15%" class="tc"><a href="#">查看</a> | <a href="#" onclick="showfancy('fangchan.html','725','450')">补充上传</a></td>
+				</tr>
+				<tr>
+					<td width="30%" class="bold1">购车认证</td>
+					<td width="22%" class="bold1 col_r1">5分</td>
+					<td width="28%">待上传</td>
+					<td width="15%" class="tc"><a href="#" onclick="showfancy('gouche.html','725','450')">上传资料</a></td>
+				</tr>
+				<tr>
+					<td width="30%" class="bold1">结婚认证</td>
+					<td width="22%" class="bold1 col_r3">5分</td>
+					<td width="28%">审核通过</td>
+					<td width="15%" class="tc"><a href="#">查看</a> | <a href="#" onclick="showfancy('jiehun.html','725','450')">补充上传</a></td>
+				</tr>
+				<tr>
+					<td width="30%" class="bold1">学历认证</td>
+					<td width="22%" class="bold1 col_r3">5分</td>
+					<td width="28%">审核通过</td>
+					<td width="15%" class="tc"><a href="#">查看</a> | <a href="#" onclick="showfancy('xueli.html','725','450')">补充上传</a></td>
+				</tr>
+				<tr>
+					<td width="30%" class="bold1">居住地认证</td>
+					<td width="22%" class="bold1 col_r3">5分</td>
+					<td width="28%">审核通过</td>
+					<td width="15%" class="tc"><a href="#">查看</a> | <a href="#" onclick="showfancy('juzhudi.html','725','450')">补充上传</a></td>
+				</tr>
+				<tr>
+					<td width="30%" class="bold1">技术职称认证</td>
+					<td width="22%" class="bold1 col_r3">5分</td>
+					<td width="28%">审核通过</td>
+					<td width="15%" class="tc"><a href="#">查看</a> | <a href="#" onclick="showfancy('jishu.html','725','450')">补充上传</a></td>
+				</tr>
+				<tr>
+					<td width="30%" class="bold1">视频认证</td>
+					<td width="22%" class="bold1 col_r3">5分</td>
+					<td width="28%">审核通过</td>
+					<td width="15%" class="tc"><a href="#">查看</a> | <a href="#" onclick="showfancy('shipin.html','725','450')">补充上传</a></td>
+				</tr>
+				<tr>
+					<td width="30%" class="bold1">手机实名认证</td>
+					<td width="22%" class="bold1 col_r3">5分</td>
+					<td width="28%">审核通过</td>
+					<td width="15%" class="tc"><a href="#">查看</a> | <a href="#" onclick="showfancy('shouji.html','725','450')">补充上传</a></td>
+				</tr>
+				<tr>
+					<td width="30%" class="bold1">微博认证</td>
+					<td width="22%" class="bold1 col_r3">5分</td>
+					<td width="28%">审核通过</td>
+					<td width="15%" class="tc"><a href="#">查看</a> | <a href="#" onclick="showfancy('weibo.html','725','450')">补充上传</a></td>
+				</tr>
+				<tr>
+					<td width="30%" class="bold1">实地认证</td>
+					<td width="22%" class="bold1 col_r3">5分</td>
+					<td width="28%">审核通过</td>
+					<td width="15%" class="tc"><a href="#">查看</a> | <a href="#" onclick="showfancy('shidi.html','725','450')">补充上传</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

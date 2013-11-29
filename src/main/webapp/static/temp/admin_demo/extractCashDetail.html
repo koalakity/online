@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>extractCashDetail</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/easyui.css" type="text/css">
+<link rel="stylesheet" href="css/icon.css" type="text/css">
+<link rel="stylesheet" href="css/m_style.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.cookie.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/easyui-lang-zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_common.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_fuc.js" charset="utf-8"></script>
+<style type="text/css">
+.datagrid .datagrid-pager { border-bottom:1px solid #95B8E7;}
+</style>
+<script type="text/javascript" charset="utf-8">
+<!-- 提现确认  -->
+function confirm(){  
+    $.messager.confirm('确认', '提现成功后，相应金额将会在会员账号扣除！', function(r){  
+        if (r){ 
+			$.mFuc.backUrl('extractCash.html')
+			$.messager.show({
+				title : '提示',
+				msg : '提现成功！'
+			});
+        }  
+    });  
+};
+</script>
+</head>
+<body>
+<form id="form1" method="post">
+<table class="m1" style="width:100%; border-top:none;">
+	<tr>
+		<th colspan="2" style="border-top:none;">提现信息</th>
+	</tr>
+	<tr>
+		<td class="tr td2">提现编号:</td>
+		<td>3152</td>
+	</tr>
+	<tr>
+		<td class="tr">申请人:</td>
+		<td>ha5-理财</td>
+	</tr>
+	<tr>
+		<td class="tr">提现金额:</td>
+		<td>￥3,000.00</td>
+	</tr>
+	<tr>
+		<td class="tr">提现手续费:</td>
+		<td>￥1.00</td>
+	</tr>
+	<tr>
+		<td class="tr">开户名:</td>
+		<td>ha5-理财</td>
+	</tr>
+	<tr>
+		<td class="tr">支行名称:</td>
+		<td>中国工商银行北京分行海淀支行</td>
+	</tr>
+	<tr>
+		<td class="tr">银行账号:</td>
+		<td>6222021001094296495</td>
+	</tr>
+	<tr>
+		<td class="tr">申请时间:</td>
+		<td>2012-11-16 13:57:36</td>
+	</tr>
+	<tr>
+		<td class="tr">提现状态:</td>
+		<td>
+			<input type="radio" value="0"> 新申请
+			<input type="radio" value="1"> 处理中
+			<input type="radio" value="2"> 成功
+			<input type="radio" value="3"> 失败
+		</td>
+	</tr>
+	<tr>
+		<td class="tr vtp">备注:</td>
+		<td><textarea class="textarea2" style="margin:0;">->提现</textarea></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>
+			<a class="easyui-linkbutton" iconCls="icon-ok" onclick="confirm()">提交</a>
+			<a class="easyui-linkbutton" iconCls="icon-back" onclick="$.mFuc.backUrl('extractCash.html')">返回</a>
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

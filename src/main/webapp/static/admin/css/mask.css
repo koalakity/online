@@ -1,0 +1,3 @@
+/* loading */
+.m-overlay { background:#777777; opacity: 0.7; filter: alpha(opacity=70); width:100%; z-index:1102; position:absolute; top:0; left:0;}
+.m-outer { width:200px; height:50px; position:absolute; z-index:1103; color:#666; background:#fff; text-align:center; line-height:12px; border:3px solid #ddd;}

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>loanDetail</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/easyui.css" type="text/css">
+<link rel="stylesheet" href="css/icon.css" type="text/css">
+<link rel="stylesheet" href="css/m_style.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.cookie.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/easyui-lang-zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_common.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_fuc.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/datagrid-detailview.js"></script>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+	<!-- 备注记录  -->
+	$('#userInfoPerson_datagrid').datagrid({
+		url : 'json/userInfo2.json',
+		title : '备注记录',
+		fitColumns : true,
+		pagination : true,
+		striped: true,
+		rownumbers : true,
+		singleSelect : true,
+		columns : [[
+			{field : 'memoText',title : '备注记录',width : 200,formatter : formatMemo},
+			{field : 'name',title : '操作人',width : 25},
+			{field : 'operateTime',title : '操作时间',width : 40,formatter : formatDate}
+		]]
+	});
+});
+<!-- 增加备注  -->
+function addMemo(){
+	$('#userInfoPerson_datagrid').datagrid('uncheckAll').datagrid('unselectAll');
+	$('<div/>').dialog({
+		href : 'memo.html',
+		width : 270,
+		height : 200,
+		modal : true,
+		title : '添加备注',
+		buttons : [{
+			text : '添加',
+			iconCls : 'icon-add',
+			handler : function(){
+				var d = parent.$(this).closest('.window-body');
+				d.dialog('destroy');
+				parent.$.messager.show({
+					title : '提示',
+					msg : '添加成功！'
+				});
+			}
+		}],
+		onClose : function() {
+			$(this).dialog('destroy');
+		}
+	});
+};
+<!-- 备注详情  -->
+function memoDetail(val){
+	$('<div/>').dialog({
+		content : '<div style="margin:6px;">'+val+'</div>',
+		width : 350,
+		modal : true,
+		title : '详情',
+		onClose : function() {
+			$(this).dialog('destroy');
+		}
+	});
+};
+<!-- 备注记录  -->
+function formatMemo(val){
+	return '<img src="css/icons/search.png" onclick="memoDetail(\''+val+'\')" title="查看详情" />&nbsp;'+val
+};
+<!-- 操作时间  -->
+function formatDate(val){
+	return $.mFuc.dateM(val);
+};
+</script>
+</head>
+<body class="wd2_body">
+	<div class="easyui-tabs">
+		<div data-options="title:'基本信息',href:'loanDetailTab1.html'"></div>
+		<div data-options="title:'投标列表',href:'loanDetailTab2.html'"></div>
+		<div data-options="title:'还款信息',href:'loanDetailTab3.html'"></div>
+	</div>
+	<div class="gap"></div>
+	<table id="userInfoPerson_datagrid" toolbar="#toolbar"></table>
+	<!-- toolbar  -->
+	<div id="toolbar">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addMemo();return false;">添加备注</a>
+	</div>
+</body>
+</html>

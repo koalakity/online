@@ -1,0 +1,49 @@
+<div class="autlayer">
+	<div class="autlayer_t"><img src="../../images/shouji_t.jpg" /><a href="#" class="autlayer_close fr"  onclick="parent.closefancy();"></a></div>
+	<div class="autlayer_c">
+		<div class="upload_t">
+			<p>1.请上传您绑定的手机号码最近3个月的话费详情原件照片（需清晰显示机主手机号码）；</p>
+			<p>2.如话费详情记录较多可分月打印并上传。</p>
+		</div>
+		<form id="form12" method="post">
+		<table class="upload_c">
+			<tr>
+				<td class="td1">姓名</td>
+				<td class="td2"><input type="text" class="input_text1 realname required" /></td>
+				<td><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td class="td1">手机号码</td>
+				<td class="td2"><input type="text" class="input_text1 mobile required" /></td>
+				<td><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr class="tr1">
+				<td colspan="2"><input type="button" class="btn_r2 fr" value="上传文件" /><span class="sp1">每张图片最大限制为3MB，图片格式为JPG,GIF,PNG&nbsp;</span></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="3" class="tc">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" class="btn_r1 fr" value="提交审核" /></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	//焦点验证
+	$.mValidate($('#form12'),"true");
+	//提交验证，通过则关闭弹出层
+	$("input[type='submit']").click(function(){
+		if($.mValidate($('#form12'),"","true")){
+			alert("提交成功！")
+			parent.closefancy();
+		}else{
+			return false;
+		};
+	});
+});
+</script>

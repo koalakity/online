@@ -1,0 +1,37 @@
+<div class="autlayer">
+	<div class="autlayer_t"><img src="../../images/weibo_t.jpg" /><a href="#" class="autlayer_close fr"  onclick="parent.closefancy();"></a></div>
+	<div class="autlayer_c">
+		<div class="upload_t">
+			<p>1.请访问http://e.weibo.com/onlinecredit，把证大e贷加为关注；</p>
+			<p>2.在微博上，转发一条最新的证大e贷的微博。</p>
+		</div>
+		<form id="form14" method="post">
+		<table class="upload_c">
+			<tr>
+				<td class="td1">您的新浪微博账号</td>
+				<td class="td2"><input type="text" class="input_text1 chars100 required" /></td>
+				<td><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" class="btn_r1 fr" value="提交审核" /></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	//焦点验证
+	$.mValidate($('#form14'),"true");
+	//提交验证，通过则关闭弹出层
+	$("input[type='submit']").click(function(){
+		if($.mValidate($('#form14'),"","true")){
+			alert("提交成功！")
+			parent.closefancy();
+		}else{
+			return false;
+		};
+	});
+});
+</script>

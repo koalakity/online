@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>extractCash</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/easyui.css" type="text/css">
+<link rel="stylesheet" href="css/icon.css" type="text/css">
+<link rel="stylesheet" href="css/m_style.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.cookie.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/easyui-lang-zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_common.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_fuc.js" charset="utf-8"></script>
+<style type="text/css">
+.datagrid .datagrid-pager { border-bottom:1px solid #95B8E7;}
+</style>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+	<!-- 列表  -->
+	$('#extractCash_datagrid').datagrid({
+		url : 'json/extractCash.json',
+		fitColumns : true,
+		border : false,
+		pagination : true,
+		striped: true,
+		rownumbers : true,
+		columns:[[
+			{field:'extractId',title:'提现编号',width : 30},
+			{field:'realName',title:'申请人',width : 50,formatter : formatrealName},
+			{field:'extractAmountFormatt',title:'提现金额',width : 50},
+			{field:'extractCostFormatt',title:'提现手续费',width : 50},
+			{field:'bankName',title:'开户名',width : 150},
+			{field:'extractTimeFormatt',title:'申请时间',width : 70},
+			{field:'action',title:'操作',width : 20,formatter : formatAction}
+		]]
+	});
+	<!-- 列格搜索  -->
+	$('#extractCash_search').searchbox({  
+		searcher:function(val,name){  
+			alert("搜索栏:" + name + " 搜索内容:" + val)  
+		},
+		prompt:'请输入搜索内容'  
+	});
+});
+<!-- 申请人  -->
+function formatrealName(val){
+	url='userInfoPerson.html';
+	return $.mFuc.newW(url,val);
+};
+<!-- 操作  -->
+function formatAction(val,row,index){
+	var url="extractCashDetail.html";
+	return '<img src="css/icons/search.png" onclick="window.location.href=\''+url+'\'" title="详情" />';
+}
+<!-- 清空搜索  -->
+function cSearch(){
+	$('#extractCash_datagrid').datagrid('load',{});
+	$('#extractCash_search').searchbox('setValue','');
+}
+<!-- 高级搜索  -->
+function aSearch(){
+	$('<div/>').dialog({
+		href : 'extractCashSearch.html',
+		width : 300,
+		height : 165,
+		modal : true,
+		title : '高级搜索',
+		buttons : [{
+			text : '搜索',
+			iconCls : 'icon-search',
+			handler : function(){
+				var d = $(this).closest('.window-body');
+				d.dialog('destroy');
+			}
+		},{
+			text : '取消',
+			iconCls : 'icon-cancel',
+			handler : function(){
+				var d = $(this).closest('.window-body');
+				d.dialog('destroy');
+			}
+		}],
+		onClose : function() {
+			$(this).dialog('destroy');
+		}
+	});
+};
+</script>
+</head>
+<body>
+	<table id="extractCash_datagrid" toolbar="#toolbar"></table>
+	<!-- toolbar  -->
+	<div id="toolbar">
+		<div class="fr">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="aSearch()">高级搜索</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="cSearch()">清空条件</a>
+		</div>
+		<div class="toolbar-s-input">
+			<input id="extractCash_search"></input>
+		</div>
+	</div>
+</body>
+</html>

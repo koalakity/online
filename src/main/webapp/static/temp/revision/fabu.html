@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>fabu</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../../css/revision_html.css" type="text/css">
+<link rel="stylesheet" href="../../css/jquery.fancybox-1.3.4.css" type="text/css"/>
+<script type="text/javascript" src="../../js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.fancybox-1.3.4.js"></script>
+<script type="text/javascript">
+$(function(){
+	//灯泡
+	$(".loan_r_person_r").find("img").hover(
+		function(){
+			$(this).attr("src","../../images/bulb_hover.png");
+			showTip($(this),"技术职称认证","待上传");
+		},
+		function(){
+			$(this).attr("src","../../images/bulb_fail.png");
+			$(".bulbtip").remove();
+		}
+	);
+	//调用弹出层	
+	$("#a_pilu").fancybox({modal:true,autoDimensions:false,width:645,height:375,padding:0,margin:0,centerOnScroll:true});
+});
+//灯泡显示方式
+var showTip = function(obj,msg1,msg2){
+	var tipBox = $('<div class="bulbtip"><div class="bulbtip-c"><p class="bulbtip-c-l"><strong>'+msg1+'</strong><br />'+msg2+'</p></div><div class="bulbtip-t"></div></div>');
+	if(msg1!=""){
+		tipBox.appendTo($("body")).css({
+			"left" : obj.offset().left,
+			"top" : obj.offset().top - 50
+		});		
+	};
+};
+//关闭弹出层
+function closefancy(){
+    $.fancybox.close();
+};
+</script>
+</head>
+<body>
+<div class="content">
+	<div class="loan_l">
+		<ul>
+			<li>上传资料&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></li>
+			<li>获取额度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></li>
+			<li class="on">发布借款&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></li>	
+		</ul>
+	</div>
+	<div class="loan_r">
+		<div class="loan_r_person">
+			<div class="loan_r_person_l">
+				<div class="person_img_bg">
+					<img src="../../images/nophoto.jpg" width="73" height="80" />
+				</div>
+				<p>昵称：月亮忘记了</p>
+				<p>邮箱：moonshine1687@126.com</p>
+				<p>手机号码：13512112512</p>
+				<p>注册时间： 2012-07-16</p>
+			</div>
+			<div class="loan_r_person_r">
+				<table>
+					<tr class="tr1">
+						<td>身份</td>
+						<td>工作</td>
+						<td>信用</td>
+						<td>收入</td>
+						<td>房产</td>
+						<td>购车</td>
+						<td>结婚</td>
+						<td>学历</td>
+						<td>居住地</td>
+						<td>技术职称</td>
+						<td>视频</td>
+						<td>手机实名</td>
+						<td>微博</td>
+						<td>实地</td>
+					</tr>
+					<tr>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_success.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+						<td><img src="../../images/bulb_fail.png" /></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="loaninfo">
+			<div class="loaninfo_t"></div>
+			<table class="loaninfo_c">
+				<tr>
+					<td class="td1"><span class="col_r4">*</span> 借款标题</td>
+					<td class="td2"><input type="text" class="input_text1" /></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="td1">借款用途</td>
+					<td class="td2">
+						<div class="select1_border">
+							<div class="select1_con">
+								<select class="select1"><option></option></select>
+							</div>
+						</div>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="td1"><span class="col_r4">*</span> 借款金额</td>
+					<td class="td2"><input type="text" class="input_text1" /></td>
+					<td><span class="font_14">元</span></td>
+				</tr>
+				<tr>
+					<td class="td1">借款期限</td>
+					<td class="td2">
+						<div class="select1_border">
+							<div class="select1_con">
+								<select class="select1"><option></option></select>
+							</div>
+						</div>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="td1"><span class="col_r4">*</span> 年利率</td>
+					<td class="td2"><input type="text" class="input_text1" /></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="td1">还款周期</td>
+					<td class="td2">
+						<div class="select1_border">
+							<div class="select1_con">
+								<select class="select1"><option></option></select>
+							</div>
+						</div>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="td1">还款方式</td>
+					<td class="td2">
+						<div class="select1_border">
+							<div class="select1_con">
+								<select class="select1"><option></option></select>
+							</div>
+						</div>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="td1">筹标期限</td>
+					<td class="td2">
+						<div class="select1_border">
+							<div class="select1_con">
+								<select class="select1"><option></option></select>
+							</div>
+						</div>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="td1">每月还本息</td>
+					<td class="td2"><input type="text" class="input_text1" /></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="td1">每月交借款管理费</td>
+					<td class="td2"><input type="text" class="input_text1" /></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="td1"><span class="col_r4">*</span> 借款描述</td>
+					<td class="td2"><textarea class="textarea_1"></textarea></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="td1">&nbsp;</td>
+					<td class="td2 font_14"><input type="checkbox" /> 我同意 <a href="#">证大e贷收费条款</a>和<a id="a_pilu" href="#pilu">信息披露要求</a></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="td1">&nbsp;</td>
+					<td class="td2"><input type="submit" class="btn_r4" value="发布" /><input type="button" class="btn_r4"  value="预览" /></td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>	
+		</div>
+	</div>
+</div>
+<div  style="display: none;">
+	<div class="autlayer autlayer2" id="pilu">
+		<div class="autlayer_t"><img src="../../images/pilu_t.jpg" /><a href="#" class="autlayer_close fr"  onclick="parent.closefancy();"></a></div>
+		<div class="autlayer_c2">
+			<div class="autlayer_c2_t">
+				<p>发布借款后，您勾选的信息将会公开给借出者，作为借出者投资的参考依据</p>
+			</div>
+			<div class="autlayer_c2_c">
+				<span><input type="checkbox"/>年龄</span>
+				<span><input type="checkbox"/>性别</span>
+				<span><input type="checkbox"/>学历</span>
+				<span><input type="checkbox"/>毕业学校</span>
+				<span><input type="checkbox"/>入学年份</span>
+				<span><input type="checkbox"/>工作城市</span>
+				<span><input type="checkbox"/>公司行业</span>
+				<span><input type="checkbox"/>公司规模</span>
+				<span><input type="checkbox"/>职位</span>
+				<span><input type="checkbox"/>现单位工作时间</span>
+				<span><input type="checkbox"/>是否结婚</span>
+				<span><input type="checkbox"/>有无购房</span>
+				<span><input type="checkbox"/>有无房贷</span>
+				<span><input type="checkbox"/>有无购车</span>
+				<span><input type="checkbox"/>有无车贷</span>
+			</div>
+			<input type="submit" class="btn_r4" value="提交" style="margin:40px auto 0; display:block;" />
+		</div>
+	</div>
+</div>
+</body>
+</html>

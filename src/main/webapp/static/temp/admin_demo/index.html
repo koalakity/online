@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>index</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/easyui.css" type="text/css">
+<link rel="stylesheet" href="css/icon.css" type="text/css">
+<link rel="stylesheet" href="css/m_style.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.cookie.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/easyui-lang-zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_common.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_fuc.js" charset="utf-8"></script>
+</head>
+<body class="easyui-layout">
+	<div data-options="region:'north',border:false" style="height:60px; padding:12px 5px 0; background:#e4edfe; text-align:right; line-height:1.5em;">
+		<img src="css/m_images/logo.jpg" class="fl"/>
+		<span>【证大】，欢迎您。 2012年11月15日 星期四</span>
+		<br />
+		<a href="#" class="easyui-linkbutton fr" data-options="plain:true,iconCls:'icon-no'">退出</a>
+		<a href="#" class="easyui-linkbutton fr" data-options="plain:true,iconCls:'icon-m-set'">个人设置</a>
+		<a href="#" class="easyui-linkbutton fr" data-options="plain:true,iconCls:'icon-back'">前台</a>
+	</div>
+	<div data-options="region:'west',title:'菜单',split:true" style="width:190px;">
+		<div id="side" class="easyui-accordion" data-options="fit:true,border:false,selected:false">
+			<div title="会员查询">
+				<ul id="sidebar1"></ul>
+			</div>
+			<div title="借款管理">
+				<ul id="sidebar2"></ul>
+			</div>
+			<div title="提现管理">
+				<ul id="sidebar3"></ul>
+			</div>
+			<div title="资金管理">
+				<ul id="sidebar4"></ul>
+			</div>
+			<div title="内容管理">
+				<ul id="sidebar5"></ul>
+			</div>
+			<div title="系统管理">
+				<ul id="sidebar6"></ul>
+			</div>
+			<div title="UC">
+				<ul id="sidebar7"></ul>
+			</div>
+			<div title="OTHER">
+				<ul id="sidebar8"></ul>
+			</div>
+		</div>
+	</div>
+	<div data-options="region:'center'" style="overflow:hidden;">
+		<div id="centerTabs" class="easyui-tabs" data-options="fit:true,border:false,tools:'#tab-tools'">
+			<div title="首页"><iframe src="home.html" frameborder="0" style="border:0;width:100%;height:100%;"></iframe></div>
+		</div>
+	</div>
+	<div data-options="region:'south',border:false" style="height:30px; line-height:30px; text-align:center; background:#e4edfe;">© 2012证大财富 All rights reserved</div>
+	<!-- 选项卡tools -->
+	<div id="tab-tools">  
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" onclick="refreshTab()"></a>  
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-cancel'" onclick="removeTab()"></a>  
+    </div>
+	<!-- 选项卡右键event -->
+	<div id="centerTabsMenu" style="width:120px;display:none;">
+		<div type="refresh">刷新</div>
+		<div class="menu-sep"></div>
+		<div type="close">关闭</div>
+		<div type="closeOther">关闭其他</div>
+		<div type="closeAll">关闭所有</div>
+	</div>
+	<script type="text/javascript" charset="UTF-8">
+		$(function(){
+			//遍历左侧tree
+			for(n=1;n<9;n++){
+				$('#sidebar'+n).tree({
+					url : 'json/west'+n+'.json',
+					lines : true,
+					onClick : function(node){
+						if(node.attributes && node.attributes.src){
+							addTab({
+								src : node.attributes.src,
+								title : node.text
+							});
+						};
+					}
+				});
+			};
+			$('#centerTabsMenu').menu({
+				onClick : function(item){
+					var curTabTitle = $(this).data('tabTitle');
+					var type = $(item.target).attr('type');
+					if (type === 'refresh') {
+						refreshTab(curTabTitle);
+						return;
+					};
+					if (type === 'close') {
+						removeTab(curTabTitle);
+						return;
+					};
+					var allTabs = $('#centerTabs').tabs('tabs');
+					var closeTabsTitle = [];
+					$.each(allTabs, function(){
+						var opt = $(this).panel('options');
+						if (opt.closable && opt.title != curTabTitle && type === 'closeOther'){
+							closeTabsTitle.push(opt.title);
+						}else if (opt.closable && type === 'closeAll'){
+							closeTabsTitle.push(opt.title);
+						}
+					});
+					for(var i = 0; i < closeTabsTitle.length; i++){
+						$('#centerTabs').tabs('close',closeTabsTitle[i]);
+					}
+				}
+			});
+			$('#centerTabs').tabs({
+				onContextMenu : function(e,title){
+					e.preventDefault();
+					$("#centerTabsMenu").menu('show',{
+						left : e.pageX,
+						top : e.pageY
+					}).data('tabTitle', title);
+				}
+			});
+			//左侧菜单和tab的title同步
+			$('.tabs-header','#centerTabs').find("li").live("click",function(){
+				var tabstitle = $(this).find(".tabs-title").html();
+				if(tabstitle==="首页"){
+					$('#side').find(".tree-node-selected").removeClass("tree-node-selected");
+				}else{
+					$('.tree-node','#side').each(function(){
+						var treenode = $(this);
+						if(treenode.children(".tree-title").html()==tabstitle){
+							var treetitle = treenode.parents('.accordion-body').prev('.accordion-header').find('.panel-title').html();
+							$('#side').accordion('select',treetitle);
+							treenode.click();
+							var node = treenode.parents('[id^=sidebar]').tree('getSelected');
+							var parentnode = treenode.parents('[id^=sidebar]').tree('getParent',node.target);
+							var parentOpen = function(){
+								if(parentnode){
+									treenode.parents('[id^=sidebar]').tree('expand',parentnode.target);
+								}else{
+									return;
+								};
+								parentnode = treenode.parents('[id^=sidebar]').tree('getParent',parentnode.target);
+								parentOpen();
+							};
+							parentOpen();
+						};
+					});
+				};
+			});
+		});
+		function addTab(opts) {
+			var options = $.extend({
+				content : '<iframe src="' + opts.src + '" frameborder="0" style="border:0;width:100%;height:100%;"></iframe>',
+				closable : true
+			}, opts);
+			if ($('#centerTabs').tabs('exists', options.title)) {
+				$('#centerTabs').tabs('select', options.title);
+			}else{
+				$('#centerTabs').tabs('add', options);			
+			};
+		};
+		function refreshTab(title){
+			if(title){
+				$('#centerTabs').tabs('select',title);
+			};
+			var tab	= $('#centerTabs').tabs('getSelected');
+			var index = $('#centerTabs').tabs('getTabIndex',tab);
+			var src = tab.panel('panel').find('iframe').eq(0).attr('src');
+			$('#centerTabs').tabs('update',{
+				tab:tab,
+				options:{
+					content:'<iframe src="' + src + '" frameborder="0" style="border:0;width:100%;height:100%;"></iframe>'
+				}
+			});
+        };
+		function removeTab(title){
+			if(title){
+				$('#centerTabs').tabs('select',title);
+			};
+			var tab	= $('#centerTabs').tabs('getSelected');
+			var index = $('#centerTabs').tabs('getTabIndex',tab);
+			if(tab.panel('options').closable){
+				$('#centerTabs').tabs('close',index);
+			}else{
+				$.messager.alert('提示', '<strong>[' + tab.panel('options').title + ']</strong>不可以被关闭', 'error');
+			};
+        };
+	</script>
+</body>
+</html>

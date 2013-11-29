@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>staffList.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/easyui.css" type="text/css">
+<link rel="stylesheet" href="css/icon.css" type="text/css">
+<link rel="stylesheet" href="css/m_style.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.cookie.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/easyui-lang-zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_common.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_fuc.js" charset="utf-8"></script>
+<style type="text/css">
+.datagrid .datagrid-pager { border-bottom:1px solid #95B8E7;}
+</style>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+	<!-- 列表  -->
+	$('#staffList_datagrid').datagrid({
+		url : 'json/staffList.json',
+		fitColumns : true,
+		border : false,
+		pagination : true,
+		striped: true,
+		rownumbers : true,
+		columns : [[ 
+			{field : 'ck',checkbox : true},
+			{field : 'name',title : '姓名',width : 50},
+			{field : 'systemName',title : '登录名',width : 50},
+			{field : 'gender',title : '性别',width : 20,formatter : formatSex},
+			{field : 'eMail',title : 'Email',width : 80},
+			{field : 'mobile',title : '手机',width : 50},
+			{field : 'depNames',title : '部门',width : 50},
+			{field : 'levelNames',title : '职级',width : 50},
+			{field : 'createDate',title : '创建日期',width : 50,formatter : formatDate}
+		]]		
+	});
+	<!-- 列格搜索  -->
+	$('#staffList_search').searchbox({  
+		searcher:function(val,name){  
+			alert("搜索栏:" + name + " 搜索内容:" + val)  
+		},  
+		prompt:'请输入搜索内容'  
+	});
+});
+<!-- 性别  -->
+function formatSex(val){
+	if(val=="1"){
+		return $.mFuc.backpic("woman.png");	   
+	}else if(val=="0"){
+		return $.mFuc.backpic("man.png");	      
+	}else{
+		return val;
+	};
+};
+<!-- 操作时间  -->
+function formatDate(val){
+	return $.mFuc.dateD(val);
+};
+<!-- 增加  -->
+function addStaff(){
+	$('#staffList_datagrid').datagrid('uncheckAll').datagrid('unselectAll');
+	$('<div/>').dialog({
+		href : 'addStaff.html',
+		width : 510,
+		height : 278,
+		modal : true,
+		title : '新建用户',
+		buttons : [{
+			text : '增加',
+			iconCls : 'icon-add',
+			handler : function(){
+				var d = $(this).closest('.window-body');
+				d.dialog('destroy');
+				$.messager.show({
+					title : '提示',
+					msg : '添加成功！'
+				});		
+			}
+		},{
+			text : '取消',
+			iconCls : 'icon-cancel',
+			handler : function(){
+				var d = $(this).closest('.window-body');
+				d.dialog('destroy');
+			}
+		}],
+		onClose : function() {
+			$(this).dialog('destroy');
+		}
+	});
+};
+<!-- 编辑  -->
+function editStaff(){
+	var rows = $('#staffList_datagrid').datagrid('getChecked');
+	var url="staffListEdit.html";
+	if (rows.length > 1) {
+		$.messager.show({
+			title : '提示',
+			msg : '一次只能对一个用户进行编辑！'
+		});
+	}else if(rows.length < 1){
+		$.messager.show({
+			title : '提示',
+			msg : '请勾选要编辑的用户！'
+		});
+	}else{
+		window.open(url,'','scrollbars=yes,width=800,height=600,left='+($.mFuc.winW()-800)/2+',top='+($.mFuc.winH()-700)/2+'');
+	};
+};
+<!-- 分配  -->
+function assignRoles(){
+	var rows = $('#staffList_datagrid').datagrid('getChecked');
+	if(rows.length < 1){
+		$.messager.show({
+			title : '提示',
+			msg : '请勾选要分配的用户！'
+		});
+	}else{
+		$('<div/>').dialog({
+			href : 'assignRoles.html',
+			width : 500,
+			height : 370,
+			modal : true,
+			title : '分配角色',
+			buttons : [{
+				text : '分配',
+				iconCls : 'icon-ok',
+				handler : function(){
+					var d = $(this).closest('.window-body');
+					d.dialog('destroy');
+					$.messager.show({
+						title : '提示',
+						msg : '分配成功！'
+					});
+				}
+			},{
+				text : '取消',
+				iconCls : 'icon-cancel',
+				handler : function(){
+					var d = $(this).closest('.window-body');
+					d.dialog('destroy');
+				}
+			}],
+			onClose : function() {
+				$(this).dialog('destroy');
+			}
+		});	
+	};
+};
+<!-- 删除  -->
+function bulkRemoveStaff(){
+	var rows = $('#staffList_datagrid').datagrid('getChecked');
+	var user = "";
+	for(var i=0; i<rows.length; i++){
+		user = user+rows[i].name+" ";
+	};
+	if (rows.length > 0) {
+		$.messager.confirm('确认','确认要删除 '+user+'吗？', function(r){
+			if(r){
+				$.messager.show({
+					title : '提示',
+					msg : '删除成功！'
+				});
+			};
+		});
+	}else{
+		$.messager.show({
+			title : '提示',
+			msg : '请勾选要删除的用户！'
+		});
+	};
+};
+<!-- 清空搜索  -->
+function cSearch(){
+	$('#staffList_datagrid').datagrid('load',{});
+	$('#staffList_search').searchbox('setValue','');
+};
+<!-- 高级搜索  -->
+function aSearch(){
+	$('<div/>').dialog({
+		href : 'staffListSearch.html',
+		width : 300,
+		height : 222,
+		modal : true,
+		title : '高级搜索',
+		buttons : [{
+			text : '搜索',
+			iconCls : 'icon-search',
+			handler : function(){
+				var d = $(this).closest('.window-body');
+				d.dialog('destroy');
+			}
+		},{
+			text : '取消',
+			iconCls : 'icon-cancel',
+			handler : function(){
+				var d = $(this).closest('.window-body');
+				d.dialog('destroy');
+			}
+		}],
+		onClose : function() {
+			$(this).dialog('destroy');
+		}
+	});
+};
+</script>
+</head>
+<body>
+	<table id="staffList_datagrid" toolbar="#toolbar"></table>
+	<!-- toolbar  -->
+	<div id="toolbar">
+		<div class="fr">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="aSearch()">高级搜索</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="cSearch()">清空条件</a>
+		</div>
+		<div class="toolbar-s-input">
+			<input id="staffList_search"></input>
+		</div>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addStaff()">新建</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editStaff()">编辑</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="assignRoles()">分配</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="bulkRemoveStaff()">删除</a>
+	</div>
+</body>
+</html>

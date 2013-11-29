@@ -1,0 +1,26 @@
+.pop-box {   
+            z-index: 9999; /*这个数值要足够大，才能够显示在最上层*/  
+            margin-bottom: 3px;   
+            display: none;   
+            position: absolute;   
+            background: #FFF;   
+            border: solid 1px #6e8bde;   
+        }   
+
+        .pop-box-body {   
+            clear: both;   
+            margin: 4px;   
+            padding: 2px;   
+        } 
+        
+        
+        .mask {   
+           /*  color: #C7EDCC; */
+            /*background-color: Silver;  */
+            position: absolute;
+            top: 0px;
+            left: 0px;
+          	opacity:0.3; 
+          	filter: alpha(opacity=30); 
+          	background-color:#000;
+        } 

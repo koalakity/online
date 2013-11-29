@@ -1,0 +1,39 @@
+/* reset */
+body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, hr, form, input, p, th, td { margin:0; padding:0;}
+body { font:12px;}
+a:link, a:visited { color:#000; text-decoration:none;}
+a:hover, a:active { color:#000; text-decoration:none;}
+a.text:link, a.text:visited { color:#416AA3; text-decoration:none;}
+a.text:hover, a.text:active { color:#416AA3; text-decoration:underline;}
+img { cursor:pointer;}
+textarea { font-size:12px;}
+.fl { float:left;}
+.fr { float:right;}
+.tl { text-align:left;}
+.tc { text-align:center;}
+.tr { text-align:right;}
+.col1 { color:#E64141;}
+.bgc1 { background:#EEEEFF;}
+.m-toolbar { height:auto; padding:5px;}
+/* add */
+table.m0 { margin-top:10px;}
+table.m0 td { padding:2px 0;}
+table.m1 { border-collapse:collapse; border: 1px solid #99BBE8; font-size: 12px;}
+table.m1 tr.tr1 { height:5px;}
+table.m1 th { background:url("images/panel_title.png") repeat-x; border:1px solid #99BBE8; color:#15428B; padding:0 4px; height:25px; text-align:left;}
+table.m1 td { padding:2px 4px; line-height:18px; border-bottom:1px dotted #CCCCCC; border-right:1px dotted #CCCCCC;}
+table.m1 td.td1 { width:180px;}
+table.m2 td { padding:0 2px;}
+.ipt1 { width:123px; height:18px; line-height:18px;}
+.gap { height:10px;}
+.imgt { vertical-align:top;}
+.img1 { vertical-align:top; width:34px; height:16px;}
+.img2 { width:100px; height:100px; border:1px solid #A4BED4;}
+.mvalidatetip { width:300px; position:absolute; z-index:9900000;}
+.mvalidatetip-c { display:inline-block; position:absolute;z-index:9900001; top:0px; left:12px; padding:1.5px 5px; border:1px solid #CC9933; background:#FFFFCC; font-size:12px;}
+.mvalidatetip-p { background:url('images/validatebox_pointer.gif') no-repeat left top; display:inline-block; width:10px; height:19px; position:absolute; left:3px; top:0px; z-index:9900002;}
+.mvalidatewarn { background:url("images/validatebox_warning.png") no-repeat right 1px #FFFFEE;}
+/* reset esayui */
+.combobox-item { cursor:pointer;}
+.combobox-item-hover{ background:#D0E5F5;}
+.pagination-info { padding-right: 20px;}

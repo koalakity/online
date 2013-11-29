@@ -1,0 +1,89 @@
+<table class="m1" style="width:100%;border:none; border-top:1px dotted #CCCCCC; margin:5px 0;">
+	<tr>
+		<td class="tr" width="150">员工姓名:</td>
+		<td>穆海宝</td>
+		<td class="tr" width="150">员工编号:</td>
+		<td>0221245</td>
+	</tr>
+	<tr>
+		<td class="tr">所属部门:</td>
+		<td><select class="part_select"></select></td>
+		<td class="tr">职级:</td>
+		<td>
+			<select class="rank_select"></select>
+			<img class="vtm" title="新增" onclick="addStaffStatus($(this))" src="css/icons/edit_add.png" />
+		</td>
+	</tr>
+	<tr id="loginNameEmail">
+		<td class="tr">登录名:</td>
+		<td>mhbseal</td>
+		<td class="tr">电子邮箱:</td>
+		<td>mhbseal@163.com</td>
+	</tr>
+	<tr>
+		<td class="tr">密码有效期：</td>
+		<td colspan="3">
+			<select class="easyui-combobox" editable="false">
+				<option>3个月</option>
+				<option>6个月</option>
+				<option>9个月</option>
+				<option>12个月</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="tr">用户状态：</td>
+		<td colspan="3">
+			<select id="staffStatus" class="easyui-combobox" editable="false">
+				<option value="0">启用</option>
+				<option value="1">禁用</option>
+				<option value="2">临时启用</option>
+			</select>
+			<span id="tempEnable" class="none"><input class="easyui-datebox" style="width:80px;" /> - <input class="easyui-datebox" style="width:80px;" /></span>
+		</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td colspan="3">
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok">确定</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel">取消</a>
+		</td>
+	</tr>
+</table>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+    $('#staffStatus').combobox({ 
+		onSelect: function(opt){  
+			if(opt.value=="2"){
+				$("#tempEnable").show();
+			}else{
+				$("#tempEnable").hide();
+			}; 
+		}
+    });
+	formatCombotree($(".part_select"),"json/staffPart.json","200",true,false);
+	formatCombotree($(".rank_select"),"json/staffRank.json","200");
+});
+//增加部门
+function addStaffStatus(obj){
+	var tr = $('<tr><td class="tr">所属部门:</td><td><select class="part_select"></select></td><td class="tr">职级:</td><td><select class="rank_select"></select>&nbsp;<img class="vtm" title="新增" onclick="addStaffStatus($(this))" src="css/icons/edit_add.png" />&nbsp;<img class="vtm" title="删除" onclick="removeStaffStatus($(this))" src="css/icons/edit_remove.png" /></td></tr>');
+	tr = tr.insertBefore($("#loginNameEmail"));
+	formatCombotree(tr.find(".part_select"),"json/staffPart.json","200",true,false);
+	formatCombotree(tr.find(".rank_select"),"json/staffRank.json","200");
+};
+//删除部门
+function removeStaffStatus(obj){
+	obj.parents("tr").remove();
+};
+//formatCombotree
+function formatCombotree(obj,url,wd,multiple,cascadeCheck){
+	obj.combotree({  
+		url:url,
+		lines:true,
+		panelWidth:wd,
+		multiple:multiple,
+		cascadeCheck:cascadeCheck,
+		width:153
+	});
+};
+</script>

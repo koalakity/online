@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>diatagridToobar2-1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/easyui.css" type="text/css">
+<link rel="stylesheet" href="css/icon.css" type="text/css">
+<link rel="stylesheet" href="css/m_style.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.cookie.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/easyui-lang-zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_common.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_fuc.js" charset="utf-8"></script>
+<style type="text/css">
+.datagrid .datagrid-pager { border-bottom:1px solid #95B8E7;}
+</style>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+	<!-- 会员查询表格  -->
+	$('#userPage1_datagrid').datagrid({
+		url : 'json/userpage1.json',
+		fitColumns : true,
+		border : false,
+		pagination : true,
+		striped: true,
+		rownumbers : true,
+		columns : [[ 
+			{field : 'ck',checkbox : true},
+			{field : 'isApproveCard',title : 'ID5验证',width : 65,formatter : formatApprove},
+			{field : 'loginName',title : '昵称',width : 200,formatter : formatLoginName},
+			{field : 'email',title : '邮箱',width : 200},
+			{field : 'realName',title : '姓名',width : 80},
+			{field : 'sex',title : '性别',width : 40,formatter : formatSex},
+			{field : 'phoneNo',title : '手机号码',width : 85},
+			{field : 'identityNo',title : '身份证号码',width : 135},
+			{field : 'creditGrade',title : '信用等级',width : 75,formatter : formatGrade},
+			{field : 'creditAmount',title : '信用额度',width : 70},
+			{field : 'userStatusStr',title : '用户状态',width : 70}
+		]]
+	});
+	<!-- 会员查询表格搜索  -->
+	$('#userPage1_search').searchbox({  
+		searcher:function(val,name){  
+			alert("搜索栏:" + name + " 搜索内容:" + val)  
+		},
+		prompt:'请输入搜索内容'  
+	});
+});
+<!-- 增加  -->
+function addUsers(){
+	$('#userPage1_datagrid').datagrid('uncheckAll').datagrid('unselectAll');
+	$('<div/>').dialog({
+		href : 'addUsers.html',
+		width : 270,
+		height : 200,
+		modal : true,
+		title : '新建用户',
+		buttons : [{
+			text : '增加',
+			iconCls : 'icon-add',
+			handler : function(){
+				var d = $(this).closest('.window-body');
+				d.dialog('destroy');
+				$.messager.show({
+					title : '提示',
+					msg : '添加成功！'
+				});	
+			}
+		}],
+		onClose : function() {
+			$(this).dialog('destroy');
+		}
+	});
+};
+<!-- 编辑  -->
+function editUsers(){
+	var rows = $('#userPage1_datagrid').datagrid('getChecked');
+	var url="userInfoPerson.html";
+	if (rows.length > 1) {
+		$.messager.show({
+			title : '提示',
+			msg : '一次只能对一个用户进行编辑！'
+		});
+	}else if(rows.length < 1){
+		$.messager.show({
+			title : '提示',
+			msg : '请勾选要编辑的用户！'
+		});
+	}else{
+		window.open(url,'','scrollbars=yes,width=800,height=600,left='+($.mFuc.winW()-800)/2+',top='+($.mFuc.winH()-700)/2+'');
+	};
+};
+<!-- 删除  -->
+function bulkRemoveUsers(){
+	var rows = $('#userPage1_datagrid').datagrid('getChecked');
+	var user = "";
+	for(var i=0; i<rows.length; i++){
+		user = user+rows[i].loginName+" ";
+	};
+	if (rows.length > 0) {
+		$.messager.confirm('确认','确认要删除选中的用户 '+user+'吗？', function(r){
+			if(r){
+				$.messager.show({
+					title : '提示',
+					msg : '删除成功！'
+				});
+			};
+		});
+	}else{
+		$.messager.show({
+			title : '提示',
+			msg : '请勾选要删除的用户！'
+		});
+	};
+};
+<!-- 锁定  -->
+function bulkLockUsers(){
+	var rows = $('#userPage1_datagrid').datagrid('getChecked');
+	var user = "";
+	for(var i=0; i<rows.length; i++){
+		user = user+rows[i].loginName+" ";
+	};
+	if (rows.length > 0) {
+		$.messager.confirm('确认','确认要锁定选中的用户 '+user+'吗？', function(r){
+			if(r){
+				$.messager.show({
+					title : '提示',
+					msg : '锁定成功！'
+				});
+			};
+		});
+	}else{
+		$.messager.show({
+			title : '提示',
+			msg : '请勾选要锁定的用户！'
+		});
+	};
+};
+<!-- 解锁  -->
+function bulkUnlockUsers(){
+	var rows = $('#userPage1_datagrid').datagrid('getChecked');
+	var user = "";
+	for(var i=0; i<rows.length; i++){
+		user = user+rows[i].loginName+" ";
+	};
+	if (rows.length > 0) {
+		$.messager.confirm('确认','确认要解锁选中的用户 '+user+'吗？', function(r){
+			if(r){
+				$.messager.show({
+					title : '提示',
+					msg : '解锁成功！'
+				});
+			};
+		});
+	}else{
+		$.messager.show({
+			title : '提示',
+			msg : '请勾选要解锁的用户！'
+		});
+	};
+};
+<!-- 导出  -->
+function bulkExportUsers(datagrid){
+	var rows = datagrid.datagrid('getChecked');
+	var user = "";
+	if (rows.length == 0) {
+		$.messager.confirm('确认','确认要导出用户列表的信息吗？', function(r){
+			if(r){
+				$.messager.show({
+					title : '提示',
+					msg : '导出成功！'
+				});
+			};
+		});
+	}else{
+		$.messager.show({
+			title : '提示',
+			msg : '导出成功！'
+		});
+	};
+};
+<!-- ID5验证  -->
+function formatApprove(val){
+   if(val=="0"){
+      return "未验证";
+   }else if(val=="1"){
+      return "已验证";
+   }else{
+      return "";
+   };
+};
+<!-- 昵称  -->
+function formatLoginName(val){
+	url='userInfoJsp.html';
+	return $.mFuc.newW(url,val);
+};
+<!-- 性别  -->
+function formatSex(val){
+	if(val=="女"){
+		return $.mFuc.backpic("woman.png");	   
+		}else{
+		return $.mFuc.backpic("man.png");	      
+	};
+};
+<!-- 信用等级  -->
+function formatGrade(val){
+	switch(val){
+		case "7":
+			return $.mFuc.backpic("img22.gif","34","16");
+			break;
+		case "6":
+			return $.mFuc.backpic("img23.gif","34","16");
+			break;
+		case "5":
+			return $.mFuc.backpic("img24.gif","34","16");
+			break;
+		case "4":
+			return $.mFuc.backpic("img25.gif","34","16");
+			break;
+		case "3":
+			return $.mFuc.backpic("img26.gif","34","16");
+			break;
+		case "2":
+			return $.mFuc.backpic("img27.gif","34","16");
+			break;
+		case "1":
+			return $.mFuc.backpic("img28.gif","34","16");
+			break;
+		default:
+			return "普通会员";
+	};
+};
+<!-- 清空搜索1  -->
+function cSearch(){
+	$('#userPage1_datagrid').datagrid('load',{});
+	$('#userPage1_search').searchbox('setValue','');
+}
+</script>
+</head>
+<body>
+	<div title="会员查询">
+		<table id="userPage1_datagrid" toolbar="#toolbar"></table>
+	</div>
+	<!-- toolbar1  -->
+	<div id="toolbar">
+		<div>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addUsers()">新建</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUsers()">编辑</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="bulkRemoveUsers()">删除</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-m-lock" plain="true" onclick="bulkLockUsers()">锁定</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-m-unlock" plain="true" onclick="bulkUnlockUsers()">解锁</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-m-export" plain="true" onclick="bulkExportUsers($('#userPage1_datagrid'))">导出</a>
+		</div>
+		<table>
+			<tr>
+				<td class="tr">姓名:</td>
+				<td><input type="text"/></td>
+				<td class="tr">手机号码:</td>
+				<td><input type="text"/></td>
+				<td class="tr">邮箱:</td>
+				<td><input type="text"/></td>
+			</tr>
+			<tr>
+				<td class="tr">注册方式:</td>
+				<td>
+					<select id="regType" name="regType" class="easyui-combobox" editable="false">
+						<option value="">全部</option>
+						<option value="1">前台注册</option>
+						<option value="2">后台注册</option>
+						<option value="3">批量导入</option>
+						<option value="4">会员推荐</option>
+					</select>
+				</td>
+				<td class="tr">用户状态:</td>
+				<td>
+					<select id="userState" name="userState" class="easyui-combobox" editable="false">
+						<option value="">全部</option>
+						<option value="1">未验证</option>
+						<option value="2">已验证</option>
+						<option value="3">已提交资料</option>
+						<option value="5">正常</option>
+						<option value="6">锁定</option>
+						<option value="7">被举报</option>
+					</select>
+				</td>
+				<td class="tr">注册时间:</td>
+				<td><input class="easyui-datebox" style="width:85px;" /> - <input class="easyui-datebox" style="width:85px;" /></td>
+				<td><a href="#" class="easyui-linkbutton" iconCls="icon-search">查询</a></td></td>
+				<td><a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="cSearch()">清空搜索</a></td></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

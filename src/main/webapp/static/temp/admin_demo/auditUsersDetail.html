@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>auditUsersDetail</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/easyui.css" type="text/css">
+<link rel="stylesheet" href="css/icon.css" type="text/css">
+<link rel="stylesheet" href="css/m_style.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.cookie.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/easyui-lang-zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_common.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/m_fuc.js" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+	<!-- 个人基本信息新窗口打开  -->
+	$("#userInfoPerson").click(function(){
+		var url="userInfoPerson.html";
+		window.open(url,'','scrollbars=yes,width=800,height=600,left='+($.mFuc.winW()-800)/2+',top='+($.mFuc.winH()-700)/2+'');
+	});
+	<!-- 备注  -->
+	$('#memo_datagrid').datagrid({
+		url : 'json/memo.json',
+		title : '备注',
+		fitColumns : true,
+		pagination : true,
+		striped: true,
+		rownumbers : true,
+		singleSelect : true,
+		columns : [[
+			{field : 'memo',title : '备注记录',width : 200,formatter : formatMemo},
+			{field : 'opearateUser',title : '操作人',width : 25},
+			{field : 'operateTimeFormatt',title : '操作时间',width : 40}
+		]]
+	});
+	<!-- 退回  -->
+	$('#return_datagrid').datagrid({
+		url : 'json/return.json',
+		title : '退回',
+		fitColumns : true,
+		pagination : true,
+		striped: true,
+		rownumbers : true,
+		singleSelect : true,
+		columns : [[
+			{field : 'operateNode',title : '操作节点',width : 25},
+			{field : 'cause',title : '退回原因',width : 175,formatter : formatMemo},
+			{field : 'opearateUser',title : '操作人',width : 25},
+			{field : 'operateTimeFormatt',title : '操作时间',width : 40}
+		]]
+	});
+	<!-- 驳回  -->
+	$('#reject_datagrid').datagrid({
+		url : 'json/reject.json',
+		title : '驳回',
+		fitColumns : true,
+		pagination : true,
+		striped: true,
+		rownumbers : true,
+		singleSelect : true,
+		columns : [[
+			{field : 'operateNode',title : '操作节点',width : 25},
+			{field : 'cause',title : '驳回原因',width : 175,formatter : formatMemo},
+			{field : 'opearateUser',title : '操作人',width : 25},
+			{field : 'operateTimeFormatt',title : '操作时间',width : 40}
+		]]
+	});
+});
+<!-- 增加备注  -->
+function addMemo(){
+	$('#userInfoPerson_datagrid').datagrid('uncheckAll').datagrid('unselectAll');
+	$('<div/>').dialog({
+		href : 'memo.html',
+		width : 270,
+		height : 200,
+		modal : true,
+		title : '添加备注',
+		buttons : [{
+			text : '添加',
+			iconCls : 'icon-add',
+			handler : function(){
+				if($.mFuc.mValidate($(this).parents('.dialog-button').prev().find('#formMemo'),"","true")){
+					var d = $(this).closest('.window-body');
+					d.dialog('destroy');
+					$.messager.show({
+						title : '提示',
+						msg : '添加成功！'
+					});
+				};
+			}
+		}],
+		onClose : function() {
+			$(this).dialog('destroy');
+		}
+	});
+};
+<!-- 审核、退回、驳回、补充资料、重置、保存、返回  -->
+function confirm(){  
+    $.messager.confirm('审核', '审核通过后此信息将进入终定列表，您确定要提交吗？', function(r){  
+        if (r){  
+			$.messager.show({
+				title : '提示',
+				msg : '审核通过！'
+			});
+        }  
+    });  
+};
+function prompt1(){  
+     $.messager.prompt('退回', '退回后此信息将进入被退回节点列表，请填写退回的：', function(r){
+        if (r){  
+			$.messager.show({
+				title : '提示',
+				msg : '退会成功！'
+			});
+        }  
+    });  
+};
+function prompt2(){
+	$('<div/>').dialog({
+		href : 'reject.html',
+		width : 450,
+		height : 200,
+		modal : true,
+		title : '驳回',
+		buttons : [{
+			text : '确定',
+			iconCls : 'icon-ok',
+			handler : function(){
+				if($.mFuc.mValidate($(this).parents('.dialog-button').prev().find('#formReject'),"","true")){
+					var d = $(this).closest('.window-body');
+					d.dialog('destroy');
+					$.messager.show({
+						title : '提示',
+						msg : '驳回成功！'
+					});
+				};
+			}
+		}],
+		onClose : function() {
+			$(this).dialog('destroy');
+		}
+	});
+};
+<!-- 备注(退回、驳回原因)详情  -->
+function memoDetail(val){
+	$('<div/>').dialog({
+		content : '<div style="margin:6px;">'+val+'</div>',
+		width : 350,
+		modal : true,
+		title : '详情',
+		onClose : function() {
+			$(this).dialog('destroy');
+		}
+	});
+};
+<!-- 备注(退回、驳回原因)记录  -->
+function formatMemo(val){
+	return '<img src="css/icons/search.png" onclick="memoDetail(\''+val+'\')" title="查看详情" />&nbsp;'+val
+};
+</script>
+</head>
+<body>
+	<div class="gap"></div>
+	&nbsp;<strong>信用额度：</strong><input type="text" class="input_wd2" />
+	&nbsp;<strong>元</strong>&nbsp;&nbsp;&nbsp;&nbsp;<strong>信用评分总和：</strong><input type="text" class="input_wd1" />
+	&nbsp;<a class="easyui-linkbutton" onclick="$.mFuc.backUrl('auditUsers.html')">返回</a>
+	<div class="gap"></div>
+	<table class="m1" style="width:100%;">
+		<tr>
+			<th>认证类型</th>
+			<th>认证项目</th>
+			<th>附件</th>
+			<th>信用分数</th>
+			<th>审核</th>
+			<th>审核时间</th>
+		</tr>
+		<tr>
+			<td>基本信息</td>
+			<td><a id="userInfoPerson" class="text" href="#">个人设置相关基本信息</a></td>
+			<td>&nbsp;</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td rowspan="4">必要认证</td>
+			<td>身份认证</td>
+			<td>
+				<a href="showImg.html" target="_blank">idcard1</a> <img src="css/icons/cancel.png" height="10" width="10" /><br />
+				<a href="showImg.html" target="_blank">idcard2</a> <img src="css/icons/cancel.png" height="10" width="10" /><br />
+				<a href="showImg.html" target="_blank">idcard3</a> <img src="css/icons/cancel.png" height="10" width="10" /><br />
+				<a href="showImg.html" target="_blank">idcard4</a> <img src="css/icons/cancel.png" height="10" width="10" /><br />
+				<a href="showImg.html" target="_blank">idcard5</a> <img src="css/icons/cancel.png" height="10" width="10" />
+			</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td>工作认证</td>
+			<td>
+				<a href="showImg.html" target="_blank">job1</a> <img src="css/icons/cancel.png" height="10" width="10" /><br />
+				<a href="showImg.html" target="_blank">job2</a> <img src="css/icons/cancel.png" height="10" width="10" /><br />
+				<a href="showImg.html" target="_blank">job3</a> <img src="css/icons/cancel.png" height="10" width="10" />
+			</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td>信用报告</td>
+			<td>&nbsp;</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td>收入认证</td>
+			<td>&nbsp;</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td rowspan="10">可选认证</td>
+			<td>房产认证</td>
+			<td>&nbsp;</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td>购车认证</td>
+			<td>&nbsp;</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td>结婚认证</td>
+			<td>&nbsp;</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td>学历认证</td>
+			<td>&nbsp;</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td>居住地证明</td>
+			<td>&nbsp;</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td>技术职称认证</td>
+			<td>&nbsp;</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td>视频认证</td>
+			<td>&nbsp;</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td>手机实名认证</td>
+			<td>&nbsp;</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td>微博认证</td>
+			<td>&nbsp;</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+		<tr>
+			<td>实地认证</td>
+			<td>&nbsp;</td>
+			<td><input type="text" class="input_wd1" /></td>
+			<td><select><option>未通过</option><option>已通过</option></select></td>
+			<td>2012-12-06 16:01</td>
+		</tr>
+	</table>
+	<div class="gap"></div>
+	<div class="tc">
+		<a class="easyui-linkbutton" onclick="confirm()">审核通过</a>&nbsp;&nbsp;
+		<a class="easyui-linkbutton" onclick="prompt1()">退回至待审</a>&nbsp;&nbsp;
+		<a class="easyui-linkbutton" onclick="prompt2();">驳回</a>&nbsp;&nbsp;
+		<a class="easyui-linkbutton">补充资料</a>&nbsp;&nbsp;
+		<a class="easyui-linkbutton">重置</a>&nbsp;&nbsp;
+		<a class="easyui-linkbutton">保存</a>&nbsp;&nbsp;
+		<a class="easyui-linkbutton" onclick="$.mFuc.backUrl('auditUsers.html')">返回</a>
+	</div>
+	<div class="gap"></div>
+	<table id="memo_datagrid" toolbar="#toolbar"></table>
+	<div class="gap"></div>
+	<table id="return_datagrid"></table>
+	<div class="gap"></div>
+	<table id="reject_datagrid"></table>
+	<!-- toolbar  -->
+	<div id="toolbar">
+		<a class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addMemo()">添加备注</a>
+	</div>
+</body>
+</html>

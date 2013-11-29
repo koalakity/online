@@ -1,0 +1,5 @@
+table.m_defined { border-collapse:collapse; border: 1px solid #99BBE8; font-size: 12px;}
+table.m_defined th { background:url("images/panel_title.png") repeat-x; border:1px solid #99BBE8; color:#15428B; line-height:15px; padding:5px; text-align:left;}
+table.m_defined td { padding:3px 4px 4px; line-height:18px; border-bottom:1px dotted #CCCCCC; border-right:1px dotted #CCCCCC;}
+.readonly { border:none;}
+table.tbCss td { border:none;}

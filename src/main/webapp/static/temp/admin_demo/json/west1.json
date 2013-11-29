@@ -1,0 +1,44 @@
+[{
+	"text":"会员管理",
+	"state":"closed",
+	"children":[{
+		"text":"会员查询",
+		"attributes":{  
+			"src":"userPage.html"
+		}
+	},{
+		"text":"已进入审核",
+		"attributes":{  
+			"src":"userPage2.html"
+		}
+	}]
+},{
+	"text":"资料审核",
+	"state":"closed",
+	"children":[{
+		"text":"待审列表",
+		"attributes":{  
+			"src":"auditUsers.html"
+		}
+	},{
+		"text":"初定列表",
+		"attributes":{  
+			"src":"error_null_href.html"
+		}
+	},{
+		"text":"终定列表",
+		"attributes":{  
+			"src":"error_null_href.html"
+		}
+	},{
+		"text":"驳回列表",
+		"attributes":{  
+			"src":"error_null_href.html"
+		}
+	},{
+		"text":"补充资料",
+		"attributes":{  
+			"src":"error_null_href.html"
+		}
+	}]
+}]

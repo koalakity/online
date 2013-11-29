@@ -1,0 +1,21 @@
+[{
+	"text":"新申请提现列表",
+	"attributes":{  
+		"src":"extractCash.html"
+	}
+},{
+	"text":"处理中提现列表",
+	"attributes":{  
+		"src":"error_null_href.html"
+	}
+},{
+	"text":"成功提现列表",
+	"attributes":{  
+		"src":"error_null_href.html"
+	}
+},{
+	"text":"失败提现列表",
+	"attributes":{  
+		"src":"error_null_href.html"
+	}
+}]

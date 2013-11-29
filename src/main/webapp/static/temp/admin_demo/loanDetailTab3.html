@@ -1,0 +1,69 @@
+<table id="loanDetailTab3_datagrid"></table>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+	$('#loanDetailTab3_datagrid').datagrid({
+		url : 'json/loanDetailTab3.json',
+		fitColumns : true,
+		border : false,
+		pagination : true,
+		striped: true,
+		singleSelect : true,
+		columns : [[ 
+			{field : 'currNum',title : '编号',width : 20},
+			{field : 'repayDay',title : '还款日期',width : 40},
+			{field : 'eachRepayment',title : '当期待还本息',width : 50},
+			{field : 'principalAmtFormat',title : '当期待还本金',width : 50},
+			{field : 'remainderPrincipal',title : '剩余本金',width : 50},
+			{field : 'pastDueDays',title : '逾期天数',width : 40},
+			{field : 'overduePenaltyInterest',title : '逾期罚息',width : 40},
+			{field : 'overdueBreachPenalty',title : '逾期违约金',width : 40},
+			{field : 'monthManageCost',title : '月缴管理费',width : 50},
+			{field : 'rePayTotalAmount',title : '当期应还总额',width : 50},
+			{field : 'advancedAmount',title : '垫付金额',width : 50},
+			{field : 'notAdvancedAmount',title : '未垫付金额',width : 50},
+			{field : 'isRepayed',title : '状态',width : 40},
+		]],
+		view: detailview,
+		detailFormatter:function(index,row){
+			return '<div style="padding:5px"><table id="detail-' + index + '" style="margin:5px;"></table></div>';
+		},
+		onExpandRow: function(index,row){
+			$('#detail-'+index).datagrid({
+				url:'json/loanDetailTab3_'+row.currNum+'.json',
+				fitColumns : true,
+				singleSelect : true,
+				columns:[[
+					{field:'realName',title:'投标人',width : 50},
+					{field:'investAmount',title:'投标金额',width : 50},
+					{field:'haveScaleFormatt',title:'投标占比',width : 30},
+					{field:'monthRepayPrincipal',title:'当期未收本息',width : 50},
+					{field:'principalAmt',title:'当期未收本金',width : 50},
+					{field:'remainderPrincipal',title:'剩余本金',width : 50},
+					{field:'pastDueDays',title:'逾期天数',width : 30,formatter : function(){return row.pastDueDays+'天';}},
+					{field:'overduePenaltyInterest',title:'当期未收逾期罚息',width : 50},
+					{field:'advancedAmount',title:'垫付金额',width : 50},
+					{field:'advanceStatus',title:'还款状态',width : 30,formatter : function(val){
+						if(val=="1"){
+							return "未还款";
+						}else if(val=="2"){
+							return "已代偿";
+						}else if(val=="3"){
+							return "逾期还款";
+						}else{
+							return row.isRepayed;
+						};	
+					}}
+				]],
+				onResize:function(){
+					$('#loanDetailTab3_datagrid').datagrid('fixDetailRowHeight',index).datagrid('resize');
+				},
+				onLoadSuccess:function(){
+					setTimeout(function(){
+						$('#loanDetailTab3_datagrid').datagrid('fixDetailRowHeight',index).datagrid('resize');
+					},0);
+				}
+			});
+		}
+	});
+});
+</script>				

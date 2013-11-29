@@ -1,0 +1,62 @@
+<div class="autlayer">
+	<div class="autlayer_t"><img src="../../images/fangchan_t.jpg" /><a href="#" class="autlayer_close fr"  onclick="parent.closefancy();"></a></div>
+	<div class="autlayer_c">
+		<div class="upload_t">
+			<p>1.请上传商品房房产购房合同；</p>
+			<p>2.请上传银行按揭贷款合同；</p>
+			<p>3.请上传房产局产调单及收据。</p>
+		</div>
+		<form id="form5" method="post">
+		<table class="upload_c">
+			<tr>
+				<td class="td1">房产地址</td>
+				<td class="td2"><input type="text" class="input_text1 chars100 required" /></td>
+				<td colspan="2"><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr>
+				<td class="td1">自有房产</td>
+				<td class="td2">
+					<div class="select1_border">
+						<div class="select1_con">
+							<select class="select1"><option>仍在按揭</option></select>
+						</div>
+					</div>
+				</td>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="td1">每月按揭金额</td>
+				<td class="td2"><input type="text" class="input_text1 money" /></td>
+				<td class="td4">元 </td>
+				<td><label class="mvalidatemsg"></label></td>
+			</tr>
+			<tr class="tr1">
+				<td colspan="2"><input type="button" class="btn_r2 fr" value="上传文件" /><span class="sp1">每张图片最大限制为3MB，图片格式为JPG,GIF,PNG&nbsp;</span></td>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="4" class="tc">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" class="btn_r1 fr" value="提交审核" /></td>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+		</table>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	//焦点验证
+	$.mValidate($('#form5'),"true");
+	//提交验证，通过则关闭弹出层
+	$("input[type='submit']").click(function(){
+		if($.mValidate($('#form5'),"","true")){
+			alert("提交成功！")
+			parent.closefancy();
+		}else{
+			return false;
+		};
+	});
+});
+</script>

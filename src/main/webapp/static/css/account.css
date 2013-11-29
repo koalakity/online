@@ -1,0 +1,149 @@
+@import url(common.css);
+.account_l { float:left; width:198px; border:1px solid #dedede; border-top:none; background:#f5f5f5;}
+.account_l dl { padding-bottom:10px; background:url(../images/account_l_dt_bg.gif) repeat-x;}
+.account_l dl dt { height:35px; padding:0 15px 0 50px; background:url(../images/account_l_dt.jpg) no-repeat; line-height:35px; font-weight:bold; font-size:14px; color:#fff; cursor:pointer;}
+.account_l dl dt img { float:right; margin-top:14px;}
+.account_l dl.dl_a dt { background-position:12px 0;}
+.account_l dl.dl_b dt { background-position:12px -35px;}
+.account_l dl.dl_c dt { background-position:12px -70px;}
+.account_l dl.dl_d dt { background-position:12px -105px;}
+.account_l dl.dl_e dt { background-position:12px -140px;}
+.account_l dl.dl_f dt { background-position:12px -175px;}
+.account_l dl dd a { display:block; height:35px; margin-top:10px; padding-left:55px; line-height:35px; font-size:14px; background:url(../images/account_l_dd.jpg) no-repeat; cursor:pointer;}
+.account_l dl dd a.on { color:#000; background:#e1e6eb url(../images/account_l_dd_on.jpg) no-repeat;}
+.account_l dl.dl_a dd a.a1 { background-position:12px 0;}
+.account_l dl.dl_a dd a.a2 { background-position:12px -35px;}
+.account_l dl.dl_a dd a.a3 { background-position:12px -70px;}
+.account_l dl.dl_b dd a.a1 { background-position:12px -105px;}
+.account_l dl.dl_b dd a.a2 { background-position:12px -140px;}
+.account_l dl.dl_b dd a.a3 { background-position:12px -175px;}
+.account_l dl.dl_c dd a.a1 { background-position:12px -210px;}
+.account_l dl.dl_c dd a.a2 { background-position:12px -245px;}
+.account_l dl.dl_c dd a.a3 { background-position:12px -280px;}
+.account_l dl.dl_d dd a.a1 { background-position:12px -315px;}
+.account_l dl.dl_d dd a.a2 { background-position:12px -350px;}
+.account_l dl.dl_e dd a.a1 { background-position:12px -385px;}
+.account_l dl.dl_e dd a.a2 { background-position:12px -420px;}
+.account_l dl.dl_e dd a.a3 { background-position:12px -455px;}
+.account_l dl.dl_e dd a.a4 { background-position:12px -490px;}
+.account_l dl.dl_f dd a.a1 { background-position:12px -525px;}
+.account_l dl.dl_f dd a.a2 { background-position:12px -560px;}
+.account_l dl.dl_f dd a.a3 { background-position:12px -595px;}
+.account_l dl.dl_f dd a.a4 { background-position:12px -630px;}
+.account_r { float:right; width:794px;}
+.my_info { height:60px; padding:19px 25px; border:1px solid #ccc; border-top:none; background:#fdf4e6; line-height:30px; font-size:14px;}
+.my_info span { float:left; width:150px;}
+.account_table { width:100%; margin-top:5px; font-size:14px; text-align:center;}
+.account_table th { height:26px; border:1px solid #dedede; background:#86c3fc; color:#1b589c;}
+.account_table td { height:40px; padding:0 10px; border:1px solid #dedede;}
+td.td_t { width:178px; padding:0; font-weight:bold; color:#115098; background:#e4f2ff;}
+.my_info2 { padding:25px 0; height:140px; overflow:hidden; border:1px solid #ccc; border-top:none; background:#fff; line-height:2.2em;}
+.my_info2 img.person { float:left; width:125px; height:125px; margin-left:20px; margin-right:30px; padding:2px; background:#FFFFFF; border:1px solid #CECECE;}
+.div2 { float:left; width:260px; margin-right:30px}
+.bor_r { border-right:1px solid #ccc;}
+.bor_t { border-top:1px dashed #ccc;}
+.account_r_c { margin-top:8px; border:1px solid #dcdcdc; background:#fff;}
+.account_r_c_t { height:29px; line-height:29px; padding:0 10px; border-bottom:1px solid #dcdcdc; background:#efefef;}
+.account_r_c_t h3 { float:left; height:29px; padding:0 10px; color:#045098; font-size:14px; cursor:pointer;}
+.account_r_c_t h3.on { color:#fff; background:#115098;}
+.account_r_c_c1 { padding-top:10px;}
+.account_r_c_c1 ul { width:750px; margin:0 auto;}
+.account_r_c_c1 ul li { width:730px; padding:5px 0 5px 20px; border-bottom:1px dashed #ccc; background: url("../images/news.gif") no-repeat 3px 16px; line-height: 30px;}
+.account_r_c_c1 ul li  span { float:right;}
+.account_r_c_c1 ul li a, .account_r_c_c1 ul li a:visited { color:#3a8edc; text-decoration:underline;}
+.account_r_c_c1 ul li a, .account_r_c_c1 ul li a:visited { color:#3a8edc; text-decoration:underline;}
+.account_r_c_c { padding-bottom:20px;}
+.account_r_c_c table { width:100%; line-height:1.5em;}
+.account_r_c_c table th { height:40px; font-size:14px; font-weight:normal; background:#e4f2ff;}
+.account_r_c_c table td { padding:15px 5px; text-align:center;}
+.account_r_c_c table td.td1 { width:300px; text-align:left;}
+.account_r_c_c table td.td2 { width:400px; text-align:left; color:#FE0101; font-size:14px;}
+.account_r_c_c table td.td3 { width:180px; text-align:left;}
+.account_r_c_c table td a, .account_r_c_c table td a:visited { font-size:14px; color:#3a8edc; text-decoration:underline;}
+.account_r_c_c table td a, .account_r_c_c table td a:visited { color:#3a8edc; text-decoration:underline;}
+.account_r_c_add { margin:0; border-top:none;}
+.account_r_c_2c { padding-bottom:20px;}
+.account_r_c_2c table { width:100%;}
+.account_r_c_2c table a, .account_r_c_2c table a:visited { color:#046ade; text-decoration:underline;}
+.account_r_c_2c table a:hover { color:#046ade; text-decoration:none;}
+.account_r_c_2c table th { height:40px; padding:0 10px; font-weight:normal; background:#e4f2ff;}
+.account_r_c_2c table img.person { width:65px; height:65px; padding:2px; background:#FFFFFF; border:1px solid #CECECE;}
+.account_r_c_2c table td { padding:15px 10px; text-align:center; border-bottom:1px dashed #DCDCDC;}
+.account_r_c_2c table td.tl {text-align:left;}
+.account_r_c_2c table td.td4 { width:35px;}
+.account_r_c_2c table td.td5 { width:110px;}
+.account_r_c_2c table td.td6 { width:80px;}
+.account_r_c_2c table td.msg { padding:0; text-align:left; border-bottom:1px dashed #DCDCDC;}
+.msg_area { width:690px; margin:0 auto 15px; padding:10px 10px 10px 20px; border:1px solid #ccc; background:#f1f7fc; display:none;}
+.msg_area textarea { width:666px; height:80px; margin:10px auto 15px; padding:5px; font-size:12px;}
+.msg_area a.close, .msg_area a.close:visited { font-size:14px; line-height:14px; float:right; text-decoration:none;}
+.account_r_c_2c2 table td { border-bottom:none;}
+.account_r_c_3c { padding:8px 8px 20px;}
+.account_r_c_3c table input { height:20px; line-height:20px;}
+.prompt5 { padding:15px 25px; background:#fdf4e6; border:1px solid #ccc;}
+.account_r_c_3c table { width:100%; margin-top:8px; border:1px solid #DCDCDC;}
+.account_r_c_3c table th { height:25px; padding:0 10px; border-bottom:1px solid #DCDCDC; font-size:14px; text-align:left; font-weight:normal; background:#dae8f6;}
+.account_r_c_3c table.table1 td { padding:5px 10px; border-bottom:1px solid #dcdcdc;}
+.account_r_c_3c table.table2 td { padding:5px 10px; border:1px solid #dcdcdc;}
+.account_r_c_3c table.table3 td { width:25%; padding:5px 10px; border:1px solid #dcdcdc;}
+.account_r_c_3c table.table4 td { text-align:center; padding:5px 10px; border-bottom:1px solid #dcdcdc;}
+.account_r_c_3c table.table4 th { text-align:center;}
+.account_r_c_3c table.table5 td { padding:5px 10px;}
+.account_r_c_3c table.table10 td { padding:10px 0; text-align:center;}
+.account_r_c_3c table.table10 td.td12 { width:25px;}
+.account_r_c_3c table td.td11 { width:150px;}
+.account_r_c_3c table td.td7 { width:160px; padding:5px 0; text-align:right;}
+.account_r_c_3c table td.td8 { padding:15px 10px;}
+.account_r_c_3c table td.td10 { width:400px;}
+.account_r_c_3c table.sub_table { width:650px; margin:10px auto; display:none;}
+.account_r_c_3c table.sub_table th { text-align:center;}
+.account_r_c_3c table.sub_table td { border:1px solid #DCDCDC; text-align:center}
+.account_r_c_3c table a, .account_r_c_3c table a:visited { color:#425F9D; text-decoration:underline;}
+.account_r_c_3c table a:hover { color:#425F9D; text-decoration:underline;}
+.account_r_c_3c table.mar { margin:0;}
+.account_r_c_3c .btn1 { float:right; margin-left:10px;}
+.account_r_c_3c .select_all { height:25px;}
+.account_r_c_3c .select_all .check { float:left; margin:6px 0 0 8px; *margin:3px 0 0 12px;}
+.account_r_c_3c_add table th { padding:0;}
+.account_r_c_4c { padding:8px; font-size:14px;}
+.account_r_c_4c table input { height:20px; line-height:20px;}
+.prompt6 { padding:15px 25px; background:#fff6ca;}
+.account_r_c_4c table { width:600px; margin:8px auto 0;}
+.account_r_c_4c table td.td8 { width:180px; padding:5px 0; text-align:right;}
+.account_r_c_4c img.person { width:80px; height:80px; padding:2px; background:#FFFFFF; border:1px solid #CECECE;}
+.account_r_c_4c select { margin-top:2px; height:22px; line-height:22px;}
+.account_r_c_4c select option { line-height:22px;}
+.account_r_c_4c input.btn3 { height:30px; line-height:30px;}
+.account_r_c_5c { padding-bottom:20px;}
+.account_r_c_5c li { padding:5px 0; border-bottom:1px solid #cecece;}
+.account_r_c_5c table { width:750px; margin:0 auto;}
+.account_r_c_5c table th { font-weight:normal; color:#115098;}
+.account_r_c_5c table th a, .account_r_c_5c table th a:visited { color:#115098; text-decoration:underline;}
+.account_r_c_5c table th a:hover { color:#115098; text-decoration:none;}
+.account_r_c_5c table td.td9 { width:180px;}
+.account_r_c_5c table a.btn1 { float:right; margin-left:10px;}
+.account_r_c_5c .account_r_c_3c table { width:100%;}
+.account_r_c_5c .account_r_c_3c table .radio { float:left; margin:2px;}
+p.prompt7 { height:60px; margin-bottom:15px; padding:10px; border-top:1px dashed #cecece; border-bottom:1px dashed #cecece; overflow:hidden;}
+p.prompt7 span{ float:left; width:126px; height:30px; text-align:right;}
+p.prompt7 span.tl { text-align:left;}
+.pad { padding:0;}
+.account_r_c_3c .mar { margin:0;}
+.account_r_c_6c table { width:100%; margin-top:8px; border:1px solid #DCDCDC; background:#fff;}
+.account_r_c_6c table th { height:25px; padding:0 10px; border-bottom:1px solid #DCDCDC; font-size:14px; text-align:left; font-weight:normal; background:#dae8f6;}
+.account_r_c_6c table tr.tr1 td { height:50px; padding-top:0;}
+.account_r_c_6c table td { padding:5px 10px;}
+.account_r_c_6c table.table6 td { padding:15px 23px 0;}
+.account_r_c_6c table.table7 td { padding:15px 50px 0;}
+.my_info2 a, .my_info2 a:visited { font-size:14px; color:#3a8edc; text-decoration:underline;}
+.my_info2 a, .my_info2 a:visited { color:#3a8edc; text-decoration:underline;}
+.account_r_c_6c .table8 { margin-top:8px; border:1px solid #DCDCDC; background:#fff; padding:20px; text-indent:2em;}
+.account_r_c_6c table.table9 td { padding:25px 50px;}
+/* 2013-02-27 add */
+table.new_table1 { border:none; color:#444444; width:100%;}
+table.new_table1 th { background:#f5f5f5; height:26px; font-size:12px; text-align:left; font-weight:normal; padding:0 8px;}
+table.new_table1 tr.bg1 th { background:#dae8f6;}
+table.new_table1 td { padding:12px 10px; border-bottom: 1px solid #DCDCDC; line-height:1.5em;}
+.new_col1 {color:#57cb99;}
+.new_col2 {color:#ff7c10;}
+.new_col3 {color:#828282;}

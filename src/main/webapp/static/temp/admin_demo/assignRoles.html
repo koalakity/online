@@ -1,0 +1,54 @@
+<div style="margin:8px;">
+	<span style="line-height:30px; font-weight:bold;"><input type="radio" /> 按角色分配</span>
+	<table class="m1" style="width:100%;">
+		<tr class="tr2">
+			<td>所属系统</td>
+			<td>角色</td>
+			<td>操作</td>
+		</tr>
+		<tr>
+			<td>
+				<select class="systems_select"></select>
+			</td>
+			<td>
+				<select class="rolses_select"></select>
+			</td>
+			<td>
+				<img title="新增" onclick="addRoles($(this))" src="css/icons/edit_add.png">
+			</td>
+		</tr>
+	</table>
+	<div class="gap"></div>
+	<span style="line-height:30px; font-weight:bold;"><input type="radio" /> 按角色组分配</span><br />
+	角色组：<select class="easyui-combobox" editable="false">
+		<option>普通会员</option>
+		<option>银牌会员</option>
+		<option>金牌会员</option>
+	</select>
+</div>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+	formatCombobox($(".systems_select"),"json/systems.json");
+	formatCombobox($(".rolses_select"),"json/roles.json");
+});
+//增加角色
+function addRoles(obj){
+	var tr = $('<tr><td><select class="systems_select"></select></td><td><select class="rolses_select"></select></td><td><img title="新增" onclick="addRoles($(this))" src="css/icons/edit_add.png">&nbsp;<img title="删除" onclick="removeRoles($(this))" src="css/icons/edit_remove.png"></td></tr>');
+	tr = tr.insertAfter(obj.parents("table").find("tr:last"));
+	formatCombobox(tr.find(".systems_select"),"json/systems.json");
+	formatCombobox(tr.find(".rolses_select"),"json/roles.json");
+};
+//删除角色
+function removeRoles(obj){
+	obj.parents("tr").remove();
+};
+//formatCombobox
+function formatCombobox(obj,url){
+	obj.combobox({  
+		url:url,  
+		valueField:'id',  
+		textField:'text',
+		width:153
+	});
+};
+</script>
